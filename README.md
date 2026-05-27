@@ -26,6 +26,8 @@ npm init nodejs-express-app <project-name>
 
 If you would still prefer to do the installation manually, follow these steps:
 
+Prerequisites: Node.js `>=22.22.1`, Yarn 1.x, and MongoDB for integration tests.
+
 Clone the repo:
 
 ```bash
@@ -77,7 +79,7 @@ cp .env.example .env
 - **Dependency management**: with [Yarn](https://yarnpkg.com)
 - **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
 - **Security**: set security HTTP headers using [helmet](https://helmetjs.github.io)
-- **Santizing**: sanitize request data against xss and query injection
+- **Sanitizing**: sanitize request data against xss and query injection
 - **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
 - **Compression**: gzip compression with [compression](https://github.com/expressjs/compression)
 - **CI**: continuous integration with [Travis CI](https://travis-ci.org)
@@ -244,7 +246,7 @@ The app has a utility ApiError class to which you can attach a response code and
 For example, if you are trying to get a user from the DB who is not found, and you want to send a 404 error, the code should look something like:
 
 ```javascript
-const httpStatus = require('http-status');
+const { status: httpStatus } = require('http-status');
 const ApiError = require('../utils/ApiError');
 const User = require('../models/User');
 
@@ -417,11 +419,11 @@ The `paginate` method returns a Promise, which fulfills with an object having th
 
 Linting is done using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io).
 
-In this app, ESLint is configured to follow the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) with some modifications. It also extends [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) to turn off all rules that are unnecessary or might conflict with Prettier.
+In this app, ESLint uses the modern flat config format with the recommended JavaScript, security, and Jest rules. It also extends [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) to turn off rules that are unnecessary or might conflict with Prettier.
 
-To modify the ESLint configuration, update the `.eslintrc.json` file. To modify the Prettier configuration, update the `.prettierrc.json` file.
+To modify the ESLint configuration, update the `eslint.config.js` file. To modify the Prettier configuration, update the `.prettierrc.json` file.
 
-To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.
+To prevent a certain file or directory from being linted, add it to `eslint.config.js` and `.prettierignore`.
 
 To maintain a consistent coding style across different IDEs, the project contains `.editorconfig`
 

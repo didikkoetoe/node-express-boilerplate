@@ -25,8 +25,8 @@ If you have an awesome new feature that you want to implement or you found a bug
 
 ### Coding style guide
 
-We are using ESLint to ensure a consistent code style in the project, based on [Airbnb's JS style guide](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base).
+We are using ESLint to ensure a consistent code style in the project, with the recommended JavaScript, security, and Jest rules configured in `eslint.config.js`.
 
-Some other ESLint plugins are also being used, such as the [Prettier](https://github.com/prettier/eslint-plugin-prettier) and [Jest](https://github.com/jest-community/eslint-plugin-jest) plugins.
+Prettier is used separately for formatting, and Jest-specific linting is provided by [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest).
 
 Please make sure that the code you are pushing conforms to the style guides mentioned above.

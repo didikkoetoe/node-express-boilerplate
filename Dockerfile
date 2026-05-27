@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:24-alpine
 
 RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
 
@@ -8,7 +8,7 @@ COPY package.json yarn.lock ./
 
 USER node
 
-RUN yarn install --pure-lockfile
+RUN HUSKY=0 yarn install --frozen-lockfile
 
 COPY --chown=node:node . .
 

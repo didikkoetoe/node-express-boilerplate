@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 const paginate = (schema) => {
   /**
    * @typedef {Object} QueryResult
@@ -20,17 +18,15 @@ const paginate = (schema) => {
    * @returns {Promise<QueryResult>}
    */
   schema.statics.paginate = async function (filter, options) {
-    let sort = '';
-    if (options.sortBy) {
-      const sortingCriteria = [];
-      options.sortBy.split(',').forEach((sortOption) => {
-        const [key, order] = sortOption.split(':');
-        sortingCriteria.push((order === 'desc' ? '-' : '') + key);
-      });
-      sort = sortingCriteria.join(' ');
-    } else {
-      sort = 'createdAt';
-    }
+    const sort = options.sortBy
+      ? options.sortBy
+          .split(',')
+          .map((sortOption) => {
+            const [key, order] = sortOption.split(':');
+            return (order === 'desc' ? '-' : '') + key;
+          })
+          .join(' ')
+      : 'createdAt';
 
     const limit = options.limit && parseInt(options.limit, 10) > 0 ? parseInt(options.limit, 10) : 10;
     const page = options.page && parseInt(options.page, 10) > 0 ? parseInt(options.page, 10) : 1;
@@ -45,7 +41,7 @@ const paginate = (schema) => {
           populateOption
             .split('.')
             .reverse()
-            .reduce((a, b) => ({ path: b, populate: a }))
+            .reduce((a, b) => ({ path: b, populate: a })),
         );
       });
     }
